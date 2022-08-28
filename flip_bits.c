@@ -39,7 +39,21 @@ void print_bits(void const * const ptr, size_t const size) {
  * @param result - binary value to store the result
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define get_bit function
+STATUS_CODE get_bit(uint8_t * data, unsigned byte_length, unsigned bit_offset, bool * result) {
+  unsigned byte_index = bit_offset / BITS_IN_A_BYTE;
+  unsigned bit_index = bit_offset % BITS_IN_A_BYTE;
+  
+  if(byte_index >= byte_length) {
+    return STATUS_ERROR;
+  }
+
+  if(data[byte_index] & (1<<bit_index)) {
+    *result = true;
+  } else {
+    *result = false;
+  }
+  return STATUS_SUCCESS;
+}
 
 /**
  * @brief Sets the bit at the given offset to 1.
@@ -50,7 +64,18 @@ void print_bits(void const * const ptr, size_t const size) {
  * @param bit_offset - the offset of the bit to set (0 is lsb)
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define set_bit function
+STATUS_CODE set_bit(uint8_t * data, unsigned byte_length, unsigned bit_offset) {
+  unsigned byte_index = bit_offset / BITS_IN_A_BYTE;
+  unsigned bit_index = bit_offset % BITS_IN_A_BYTE;
+
+  if(byte_index >= byte_length) {
+    return STATUS_ERROR;
+  }
+
+  data[byte_index] |= (1<<bit_index);
+
+  return STATUS_SUCCESS;
+}
 
 /**
  * @brief Sets the bit at the given offset to 0.
@@ -61,7 +86,18 @@ void print_bits(void const * const ptr, size_t const size) {
  * @param bit_offset - the offset of the bit to clear (0 is lsb)
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define clear_bit function
+STATUS_CODE clear_bit(uint8_t * data, unsigned byte_length, unsigned bit_offset) {
+  unsigned byte_index = bit_offset / BITS_IN_A_BYTE;
+  unsigned bit_index = bit_offset % BITS_IN_A_BYTE;
+
+  if(byte_index >= byte_length) {
+    return STATUS_ERROR;
+  }
+
+  data[byte_index] &= ~(1<<bit_index);
+
+  return STATUS_SUCCESS;
+}
 
 void get_bit_test() {
   uint8_t pass = 0;
