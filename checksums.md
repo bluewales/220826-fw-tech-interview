@@ -1,5 +1,7 @@
 # Checksums (what are they good for)
 
+> What are checksums and what are they useful for?
+
 A checksum is a number (or an algorithm that produces a number) that represents another, usually larger, piece of data.  The checksum can be used to verify the integrity of the data.  Typically the checksum is transmitted or stored along side the data. When the data is received, the checksum can be recalculated and the compared checksum can be compared to the received checksum.  If they don't match, you can assume that either the data or the checksum have been corrupted and they are usually discarded.
 
 Desirable properties of a checksum are
